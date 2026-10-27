@@ -1,4 +1,4 @@
-import { streamText, UIMessage, convertToModelMessages, tool,InferUITools,UIDataTypes, stepCountIs } from 'ai'
+import { streamText, UIMessage, convertToModelMessages, tool, InferUITools, UIDataTypes, stepCountIs } from 'ai'
 import { groq } from '@ai-sdk/groq'
 import { z } from 'zod'
 import { searchDocuments } from '@/lib/search'
@@ -26,7 +26,7 @@ const tools = {
 }
 
 export type ChatTools = InferUITools<typeof tools>
-export type ChatMessage = UIMessage<never,UIDataTypes,ChatTools>
+export type ChatMessage = UIMessage<never, UIDataTypes, ChatTools>
 export async function POST(req: Request) {
     try {
         const { messages }: { messages: ChatMessage[] } = await req.json()
@@ -35,10 +35,14 @@ export async function POST(req: Request) {
             model: groq('openai/gpt-oss-20b'), // Free, fast, and extremely powerful model on Groq
             messages: await convertToModelMessages(messages), // Added 'await' here!
             tools,
-            system:`You are the a helpful assistant with access to a knowledge base.
-            when users ask questions, search the knowledge base for relevant information Always search before answering if the question might related to uploaded documents. Base your answers on the search results when available. Give concise answers that correctly answers that correctly answer what user is asking for. do not flood them with all the information from the search results
-            `,
-            stopWhen:stepCountIs(2)
+            system: `You are a professional AI assistant and career representative for Sudais Aliyi Suleyman. 
+You have access to a specific knowledge base containing Sudais's resume and documents.
+
+CRITICAL RULES:
+1. ONLY answer questions using the information found in the knowledge base.
+2. If a user asks a question that is NOT contained in or related to the knowledge base (such as general knowledge, trivia, geography, etc.), you MUST politely decline by stating: "I'm sorry, but I only have access to information regarding Sudais's professional background and documents. I cannot answer questions outside of this scope."
+3. Keep your answers professional, concise, and structured. Do not flood the user with unnecessary details.`,
+            stopWhen: stepCountIs(2)
         });
 
         return result.toUIMessageStreamResponse();
