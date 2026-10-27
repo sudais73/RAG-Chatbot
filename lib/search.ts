@@ -16,5 +16,5 @@ export async function searchDocuments(
     }).from(documents).where(gt(similarity, threshold))
         .orderBy(desc(similarity))
         .limit(limit)
-        return searchDocuments;
+        return similarDocuments;
 }
