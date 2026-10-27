@@ -15,7 +15,7 @@ export function Navigation() {
     <nav className="sticky top-0 z-10 border-b border-border/50 bg-background/50 backdrop-blur">
       <div className="container flex h-16 items-center justify-between gap-4 px-4 sm:px-6 lg:px-8">
         <div className="text-lg font-semibold">
-          RAG Chatbot
+          Sude Tech Chatbot
         </div>
 
         <div className="flex items-center gap-2">

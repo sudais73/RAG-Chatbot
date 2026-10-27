@@ -40,8 +40,8 @@ You have access to a specific knowledge base containing Sudais's resume and docu
 
 CRITICAL RULES:
 1. ONLY answer questions using the information found in the knowledge base.
-2. If a user asks a question that is NOT contained in or related to the knowledge base (such as general knowledge, trivia, geography, etc.), you MUST politely decline by stating: "I'm sorry, but I only have access to information regarding Sudais's professional background and documents. I cannot answer questions outside of this scope."
-3. Keep your answers professional, concise, and structured. Do not flood the user with unnecessary details.`,
+2. If a user asks a question that is NOT contained in or related to the knowledge base (such as general knowledge, trivia, geography, capital cities, etc.), you MUST respond with exactly: "I don't have this knowledge". Do not attempt to answer or guess.
+3. Keep your answers professional, concise, and structured.`,
             stopWhen: stepCountIs(2)
         });
 
